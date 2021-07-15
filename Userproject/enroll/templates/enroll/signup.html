@@ -1,0 +1,28 @@
+{% extends 'enroll/index.html' %}
+{% block content %}
+ {% if form.non_field_errors %}
+   {%  for error in form.non_field_errors %}
+    <p>{{error}}</p> 
+   {% endfor %}
+ {% endif %}
+
+ <form action="" method="POST" novalidate class='d-inline'>
+     {% csrf_token %}
+     {% for fm in form %}
+        <p>{{fm.label}} {{fm}} {{fm.errors|striptags}}</p>
+     {% endfor %}
+    
+    <input type="submit" class="btn btn-success" value="Submit">
+ </form>
+
+ <a href="{% url 'login' %}" class="btn logincolor"> Login</a>
+
+ {% if messages %}
+ {% for message in messages %}
+  <p {% if message.tags %} class=""{% endif %}>
+   {{message}}
+</p>
+ {% endfor %}
+{% endif %}
+
+{% endblock content %}

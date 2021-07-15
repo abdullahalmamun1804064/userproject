@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'enroll/css/fontawsam.css' %}">
+    <link rel="stylesheet" href="{% static 'enroll/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'enroll/css/style1.css'  %}">
+</head>
+<body>
+
+    <div class="container mt-2" >
+    <h4 class="alert alert-danger">{{page}} </h4>
+    {% include  'enroll/navbar.html' %}
+   {% block content %}
+ 
+   <h3 class="text-center homepage ">
+       <a href="{% url 'signup' %}" class='btn  homepage'>Signup</a>
+       <a href="{% url 'login' %}" class="btn homepage"> Login</a>
+
+       
+    </h3>
+
+   {% endblock content %}
+
+    <script src="{% static 'enroll/js/fontawesome.js' %}">   </script>
+    <script src="{% static 'enroll/js/bootstrap.min.js' %}">   </script>
+    <script src="{% static 'enroll/js/proper.js' %}">   </script> 
+    <script src="{% static 'enroll/js/jquary.js' %}">   </script>
+    <script src="{% static 'enroll/js/myjs.js' %}">   </script>
+</div>
+</body>
+</html>
+

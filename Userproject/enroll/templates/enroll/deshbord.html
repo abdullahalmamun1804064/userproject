@@ -1,0 +1,77 @@
+{% extends 'enroll/index.html' %}
+{% block content %}
+
+{% if user != None %}
+    <div>
+      <h1 class="alert alert-info text-center">All Users</h1> 
+        {% for user in user %}
+        <p></p><a href="{% url 'user_details' user.id %}" class="btn ">{{user.username}}</a></p> 
+        {% endfor %}
+    </div><hr><br><br>
+ {% endif %}
+      {% if messages %}
+      {% for message in messages %}
+      <p {% if message.tags %} class="{{message.tags}}"{% endif %}>
+        {{message}}
+    </p>
+      {% endfor %}
+    {% endif %}
+
+
+ 
+  <form action="" method="POST" novalidate class="d-inline">
+    {% csrf_token %}
+    
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+       <p class="red">{{error}}</p>
+      {% endfor %}
+    {% endif %}
+
+
+{% for fm in form %}
+<p>{{fm.label}} {{fm}} {{fm.errors|striptags}}</p>
+{% endfor %}
+<input type="submit" value="Save" class='btn btn-success'>
+
+</form><br><br>
+
+<div class="permission">
+ <h4 class='alert-danger alert'>All permission for Blog</h4>
+  <p>
+    {% if perms.enroll.add_blog %}
+      <input type="button" class="btn btn-danger" value="Add">
+    {% else %}
+      <h3>No permission for Add</h3>
+    {% endif %}
+  </p>
+  <p>
+  {% if perms.enroll.delete_blog %}
+    <input type="button" class="btn btn-danger" value="Delete">
+  {% else %}
+    <h3>No permission for delete</h3>
+  {% endif %}
+  </p>
+  <p>
+  {% if perms.enroll.change_blog %}
+  <input type="button" class="btn btn-danger" value="Change">
+   {% else %}
+  <h3>No permission for Change</h3>
+   {% endif %}
+  </p>
+
+  <p>
+{% if perms.enroll.view_blog %}
+<input type="button" class="btn btn-danger" value="View">
+{% else %}
+<h3>No permission for view</h3>
+{% endif %}
+</p>
+</div>
+
+ <a href="{% url 'logout' %}" class="btn logincolor"> Logout</a>
+ <a href="{% url 'change_pass_with_old_pass' %}" class="btn logincolor"> changepassword with old password</a>
+ <a href="{% url 'change_pass_without_old_pass' %}" class="btn logincolor"> changepassword without old password</a>
+<br><br><hr><br>
+
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends 'enroll/index.html' %}
+{% block content %}
+ <h1 class='alert alert-danger'>{{name}}'s Deshbord</h1>
+
+      {% if messages %}
+      {% for message in messages %}
+      <p {% if message.tags %} class="{{message.tags}}"{% endif %}>
+        {{message}}
+    </p>
+      {% endfor %}
+    {% endif %}
+
+
+ 
+  <form action="" method="POST" novalidate class="d-inline">
+    {% csrf_token %}
+    
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+       <p class="red">{{error}}</p>
+      {% endfor %}
+    {% endif %}
+
+
+{% for fm in form %}
+<p>{{fm.label}} {{fm}} {{fm.errors|striptags}}</p>
+{% endfor %}
+
+
+</form><br><br>
+
+
+ <a href="{% url 'deshbord' %}" class="btn logincolor ">Deshbord</a>
+
+ {% if messages %}
+ {% for message in messages %}
+  <p {% if message.tags %} class="{{message.tags}}"{% endif %}>
+   {{message}}
+</p>
+ {% endfor %}
+{% endif %}
+
+<br><br><hr><br>
+{% endblock content %}
